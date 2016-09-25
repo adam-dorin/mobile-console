@@ -1,35 +1,27 @@
- var debug = new ( function( console ){
-
-
-  // TODO: 1. base64 the arrow image;
-  //       2. handle objects and arrays passed throught the console.log ( duplicate for error and warn )
-  //       3. Test out with some actual developments
-  //       4. make github repo
-  //       5. minify the js and css
-  //       6. distrubute via http://adam-dorin.github.io/projects/mobile-debugger/
+ var debug =  ( function( console ){
 
    var Debug = {};
- 
+
    // handles the errors and throw that are loadded after;
    Debug.handleErrors = function(){
 
-      window.onerror = function(msg, url, line, col, error) {   
+      window.onerror = function(msg, url, line, col, error) {
          // some compatibility handling
-          var extra = { col:(!col ? 0 : col), error: (!error ? 0 : error) };            
-          var message = { msg: msg , 
-                         url: url, 
+          var extra = { col:(!col ? 0 : col), error: (!error ? 0 : error) };
+          var message = { msg: msg ,
+                         url: url,
                          line: line,
-                         type:"error" 
+                         type:"error"
                        };
-        
+
           for(ex in extra){
               if(extra[ex]){
-                  message[ex] = extra[ex]; 
+                  message[ex] = extra[ex];
               }
           }
           if( !Debug._uiCreated ){
-            
-              Debug._storeMessage(message)
+
+              Debug._storeMessage(message);
           }
 
           if(Debug._uiCreated){
@@ -38,7 +30,7 @@
           }
 
         var suppressErrorAlert = true;
-        return suppressErrorAlert;  
+        return suppressErrorAlert;
      };
 
    };
@@ -54,14 +46,14 @@
    Debug._recursiveText = '';
    Debug._recursiveJump = function(Obj){
      for(pr in Obj){
-      console.warn(pr)
+      console.warn(pr);
         if(typeof Obj[pr] === 'object' && !!Obj[pr]){
           var token_open = ' { ';
-          var token_close = ' } '
+          var token_close = ' } ';
 
           if(Array.isArray(Obj[pr])){
-            token_open = ' [ '
-            token_close = ' ] '
+            token_open = ' [ ';
+            token_close = ' ] ';
           }
           Debug._recursiveText += '<span class="message-child" style="margin-left:8px;clear:left;">'+pr+':'+token_open+'\n';
           Debug._recursiveJump( Obj[pr] );
@@ -69,7 +61,7 @@
         }else{
           Debug._recursiveText += pr+ ':' +Obj[pr]+'\n';
        }
-       
+
      }
    };
    Debug._writeStorage = function(){
@@ -81,53 +73,53 @@
      var msgContainer = document.createElement('span');
          msgContainer.classList.add('message');
 
-         var icon = document.createElement('div')
+         var icon = document.createElement('div');
          icon.classList.add('icon');
          msgContainer.appendChild(icon);
 
         for(prop in Stored[i]){
-          if(prop !=='error'){            
+          if(prop !=='error'){
             var el = document.createElement('div');
             el.classList.add(prop);
              el.classList.add('message-child');
-            
+
             if(prop === 'type'){
               msgContainer.classList.add('type-'+Stored[i][prop]);
             }else{
               el.innerHTML = prop+":"+Stored[i][prop];
             }
             if(Stored[i].type ==='log' && typeof Stored[i][prop] === 'object'){
-             
+
               // should handle larger depth with a recursive function
-              Debug._recursiveText ='{\n'; 
+              Debug._recursiveText ='{\n';
               var elDepth = document.createElement('div');
               elDepth.classList.add('message-child');
-               
+
               Debug._recursiveJump( Stored[i][prop] );
-               
+
               Debug._recursiveText +='}\n';
               elDepth.innerHTML = Debug._recursiveText;
               el.innerHTML = '';
               el.appendChild( elDepth );
             }
- 
+
             msgContainer.appendChild(el);
-            
+
           }
 
         }
        msgContainer.addEventListener('click',function(e){
           this.classList.toggle('active');
           if( this.classList.contains('active') ){
-            this.style.height = ((this.childNodes.length -1) * 16) +'px'; 
+            this.style.height = ((this.childNodes.length -1) * 16) +'px';
           }else{
             this.style.height = 16 +'px';
           }
        });
        if(appendChildTarget){
-         appendChildTarget.appendChild(msgContainer);       
+         appendChildTarget.appendChild(msgContainer);
        }
-       
+
      }
    };
    Debug._directWrite = function(message){
@@ -146,7 +138,7 @@
 
         var styles = document.createElement('link');
             styles.setAttribute('rel','stylesheet');
-            styles.setAttribute('href','debuger.css');
+            styles.setAttribute('href','../debuger.css');
 
 
       head[0].appendChild(styles);
@@ -170,38 +162,38 @@
 
     var params = window.location.href;
     var isActive = ( params.indexOf('activateMobileDebugger=true') !==-1 );
-    var isInactive = ( params.indexOf('activateMobileDebugger=false') !==-1 )
+    var isInactive = ( params.indexOf('activateMobileDebugger=false') !==-1 );
     //alert(params)
     if( isActive ){
-      localStorage.setItem('JSMobileDebugger',true);  
+      localStorage.setItem('JSMobileDebugger',true);
     }
     if(isInactive){
-     localStorage.setItem('JSMobileDebugger',false); 
+     localStorage.setItem('JSMobileDebugger',false);
     }
     return (localStorage.getItem('JSMobileDebugger') === "true");
-   }
+  };
    // this part handles the messages right just log, warn and error from the console object are being handled
    Debug.log = function(){
     var message = {};
     message.type = 'log';
     for (var i = arguments.length - 1; i >= 0; i--) {
       message[i]  =  arguments[i];
-    };
-    Debug._directWrite( message )
+    }
+    Debug._directWrite( message );
     // Debug.ogLog.apply( this, arguments )
-   }
+  };
    Debug.console = function( console ) {
     Debug.ogLog = console.log;
     console.log = Debug.log;
-   }
+  };
 
    Debug.init = function(){
     if(Debug.activationCheck()){
       Debug.handleErrors();
       Debug.createUI();
-      Debug.console(console)
+      Debug.console(console);
     }
-   }
+  };
 
    this.init = Debug.init;
 
