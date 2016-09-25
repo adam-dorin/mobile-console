@@ -24,6 +24,6 @@ Right now there are now
 
 ~~1. base64 the arrow image;~~
 ~~2. Handle objects and arrays passed throught the console.log ( duplicate for error and warn )~~
-3. Test out with some actual developments
+3. Test out with some actual developments<br/>
 4. Minify the js and css
 5. Distribute css and via http://adam-dorin.github.io/projects/mobile-console/
