@@ -11,7 +11,7 @@
 
 ## Dependencies :
 
-Right now there are now
+Right now there are none
 
 ## Installation:
 
@@ -22,8 +22,13 @@ Right now there are now
 
 ## TODO:
 
-~~1. base64 the arrow image;~~<br/>
-~~2. Handle objects and arrays passed throught the console.log ( duplicate for error and warn )~~<br/>
-3. Test out with some actual developments<br/>
-4. Minify the js and css<br/>
+1. ~~base64 the arrow image;~~
+2. ~~Handle objects and arrays passed throught the console.log ( duplicate for error and warn )~~
+3. Test out with some actual developments
+4. Minify the js and css
 5. Distribute css and via http://adam-dorin.github.io/projects/mobile-console/
+6. Add display trees for all the Objects types
+7. Handle ajax error
+8. Find a way to intercept and log all the requests made by the current page.
+  + Intercept all xhr based requests
+  + Intercept all file requests .css, .js , files images audio/video etc.
