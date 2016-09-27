@@ -48,6 +48,7 @@
   opacity:1;
   display:block;
   border: 1px solid #CCC;
+  background-color: #e0e0e0;
 }
 #debugger_window .messages .message .icon{
   background-image: url('http://www.clipartbest.com/cliparts/RiG/6xL/RiG6xLM6T.png');
@@ -58,7 +59,7 @@
   height: 16px;
   float: right;
   right:1px;
-  
+
 }
 #debugger_window .messages .message{
   height: 16px;
@@ -74,4 +75,9 @@
 }
 #debugger_window .messages .message.type-error{
   color:red;
+}
+@media screen and (max-width: 720px) {
+  #debugger_window{
+    width: 92%;
+  }
 }

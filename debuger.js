@@ -195,7 +195,9 @@
     }
   };
 
-   this.init = Debug.init;
+   return {
+     init:Debug.init
+   };
 
  })( console );
  debug.init();
