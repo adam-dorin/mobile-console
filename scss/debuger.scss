@@ -1,0 +1,95 @@
+@import "variables";
+
+#debugger_window {
+  width: 35%;
+  height: auto;
+  top: 10px;
+  right: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
+  padding-top: 6px;
+
+  &,
+  *:not(.message):not(.message-child) {
+    position: absolute;
+    z-index: 1000000000000;
+  }
+
+  .toggle-btn {
+    &.settings-cog {
+      background-image: $cog_image;
+      background-size: contain;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      width: 30px;
+      height: 30px;
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+    }
+  }
+
+  .messages {
+    width: 100%;
+    height: 0;
+    opacity: 0;
+    display: block;
+    border: none;
+    transition: all 1s;
+    top: 32px;
+    right: 0;
+    font-size: 12px;
+    text-align: left;
+    transition: all 1s;
+    z-index: -1;
+
+    &.active {
+      width: 100%;
+      padding: 5px;
+      z-index: 1000000000000;
+      height: auto;
+      opacity: 1;
+      display: block;
+      border: 1px solid #CCC;
+      background-color: #e0e0e0;
+
+      .icon {
+        transform: rotate(90deg);
+      }
+    }
+
+    .message {
+      height: 16px;
+      display: block;
+      overflow: hidden;
+      border-bottom: 1px solid #CCC;
+
+      .icon {
+        background-image: url("http://www.clipartbest.com/cliparts/RiG/6xL/RiG6xLM6T.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50%;
+        width: 16px;
+        height: 16px;
+        float: right;
+        right: 1px;
+      }
+
+      &:not(:nth-last-child(1)) {
+        margin-bottom: 15px;
+      }
+
+      &.type-error {
+        color: red;
+      }
+    }
+  }
+}
+@media screen and (max-width: 720px) {
+  #debugger_window {
+    width: 92%;
+  }
+}
