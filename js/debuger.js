@@ -50,7 +50,7 @@
    Debug._recursiveText = '';
    Debug._recursiveJump = function(Obj) {
      for (pr in Obj) {
-       console.warn(pr);
+       // console.warn(pr);
        if (typeof Obj[pr] === 'object' && !!Obj[pr]) {
          var token_open = ' { ';
          var token_close = ' } ';
