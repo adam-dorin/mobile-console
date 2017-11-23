@@ -26,7 +26,7 @@ None
 2. ~~Handle objects and arrays passed throught the console.log ( duplicate for error and warn )~~
 3. Test out with some actual developments
 4. ~~Minify the js and css~~
-5. ~~Distribute css and via a CDN~~ (https://cdn.jsdelivr.net/gh/adam-dorin/mobile-console@1.0/dist/debuger.js)[https://cdn.jsdelivr.net/gh/adam-dorin/mobile-console@1.0/dist/debuger.js]
+5. ~~Distribute css and via a CDN~~ [https://cdn.jsdelivr.net/gh/adam-dorin/mobile-console@1.0/dist/debuger.js][https://cdn.jsdelivr.net/gh/adam-dorin/mobile-console@1.0/dist/debuger.js]
 6. Add display trees for all the Objects types
 7. Handle ajax errors
 8. Find a way to intercept and log all the requests made by the current page.
